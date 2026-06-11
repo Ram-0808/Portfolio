@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Send, MapPin } from "lucide-react";
+import { Send, MapPin, Mail } from "lucide-react";
 import GlassCard from "./ui/GlassCard";
 import { socialLinks, personalInfo } from "../lib/constants";
 
@@ -19,80 +19,72 @@ export default function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1500));
-
     setIsSubmitting(false);
     setSubmitted(true);
     setFormState({ name: "", email: "", message: "" });
-
-    // Reset success message after 5 seconds
     setTimeout(() => setSubmitted(false), 5000);
   };
 
   return (
-    <section id="contact" className="relative py-24 md:py-32">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-bg-secondary/50 to-transparent" />
+    <section id="contact" className="relative py-32 md:py-48">
+      {/* Dramatic background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-primary/5 to-transparent" />
+      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] rounded-full bg-accent-primary/10 blur-[150px]" />
+      <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent-secondary/10 blur-[120px]" />
 
-      {/* Decorative orbs */}
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-accent-primary/10 blur-3xl" />
-      <div className="absolute top-1/4 right-1/4 w-80 h-80 rounded-full bg-accent-secondary/10 blur-3xl" />
-
-      <div className="relative z-10 max-w-4xl mx-auto px-6">
-        {/* Section header */}
+      <div className="relative z-10 max-w-5xl mx-auto px-6">
+        {/* Section header - cinema style */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
         >
-          <span className="text-accent-primary font-mono text-sm tracking-wider">// GET IN TOUCH</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-text-primary mt-2">
-            Let's Build Something{" "}
-            <span className="gradient-text">Extraordinary</span>
+          <span className="text-accent-primary font-mono text-xs tracking-[0.4em] uppercase">// Chapter 05</span>
+          <h2 className="text-5xl md:text-7xl font-black text-text-primary mt-4 tracking-tight">
+            LET'S <span className="gradient-text">CONNECT</span>
           </h2>
-          <p className="text-text-secondary mt-4 max-w-xl mx-auto">
-            Open to freelance projects and full-time opportunities. Let's discuss how I can help
-            bring your ideas to life.
+          <p className="text-lg text-text-secondary mt-6 max-w-2xl mx-auto">
+            Open to freelance projects and full-time opportunities
           </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-accent-primary to-accent-secondary mx-auto mt-6" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-8">
-          {/* Contact info */}
+        <div className="grid lg:grid-cols-5 gap-10">
+          {/* Contact info - cinema style */}
           <motion.div
             className="lg:col-span-2"
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
           >
-            <GlassCard hover={false} className="p-6 h-full">
-              <h3 className="text-xl font-bold text-text-primary mb-6">Connect With Me</h3>
+            <GlassCard hover={false} className="p-8 h-full bg-gradient-to-br from-bg-secondary/90 to-bg-primary/95">
+              <h3 className="text-2xl font-bold text-text-primary mb-8">Get In Touch</h3>
 
               {/* Location */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 rounded-lg bg-accent-primary/10">
-                  <MapPin className="w-5 h-5 text-accent-primary" />
+              <div className="flex items-center gap-4 mb-8">
+                <div className="p-4 rounded-xl bg-accent-primary/10 border border-accent-primary/20">
+                  <MapPin className="w-6 h-6 text-accent-primary" />
                 </div>
                 <div>
-                  <p className="text-text-secondary text-sm">Location</p>
-                  <p className="text-text-primary font-medium">{personalInfo.location}</p>
+                  <p className="text-text-secondary text-sm mb-1">Location</p>
+                  <p className="text-text-primary font-semibold text-lg">{personalInfo.location}</p>
                 </div>
               </div>
 
               {/* Email */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 rounded-lg bg-accent-primary/10">
-                  <Send className="w-5 h-5 text-accent-primary" />
+              <div className="flex items-center gap-4 mb-8">
+                <div className="p-4 rounded-xl bg-accent-secondary/10 border border-accent-secondary/20">
+                  <Mail className="w-6 h-6 text-accent-secondary" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-text-secondary text-sm">Email</p>
+                  <p className="text-text-secondary text-sm mb-1">Email</p>
                   <a
                     href={`mailto:${personalInfo.email}`}
-                    className="text-text-primary font-medium hover:text-accent-primary transition-colors break-all"
+                    className="text-text-primary font-semibold text-lg hover:text-accent-secondary transition-colors break-all"
                   >
                     {personalInfo.email}
                   </a>
@@ -101,7 +93,7 @@ export default function ContactSection() {
 
               {/* Social links */}
               <div className="pt-6 border-t border-white/5">
-                <p className="text-text-secondary text-sm mb-4">Social Profiles</p>
+                <p className="text-text-secondary text-sm mb-4 tracking-wider uppercase">Follow Me</p>
                 <div className="flex gap-3">
                   {socialLinks.map((link) => {
                     const IconComponent = link.icon as React.ComponentType<{size?: number; className?: string}>;
@@ -111,11 +103,11 @@ export default function ContactSection() {
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-3 rounded-lg bg-bg-primary/50 border border-white/5 hover:border-accent-primary/30 transition-colors group"
-                        whileHover={{ y: -3 }}
+                        className="p-4 rounded-xl bg-bg-primary/50 border border-white/5 hover:border-accent-primary/30 transition-all group"
+                        whileHover={{ y: -4, scale: 1.05 }}
                         title={link.name}
                       >
-                        <IconComponent size={20} className="text-text-secondary group-hover:text-accent-primary transition-colors" />
+                        <IconComponent size={22} className="text-text-secondary group-hover:text-accent-primary transition-colors" />
                       </motion.a>
                     );
                   })}
@@ -124,68 +116,68 @@ export default function ContactSection() {
             </GlassCard>
           </motion.div>
 
-          {/* Contact form */}
+          {/* Contact form - cinema style */}
           <motion.div
             className="lg:col-span-3"
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <GlassCard hover={false} className="p-6">
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <GlassCard hover={false} className="p-10 bg-gradient-to-br from-bg-secondary/90 to-bg-primary/95">
+              <form onSubmit={handleSubmit} className="space-y-8">
                 {/* Name field */}
                 <div>
-                  <label className="block text-text-secondary text-sm mb-2">Raghu Ram Kuna</label>
+                  <label className="block text-text-secondary text-sm mb-3 tracking-wider uppercase">Your Name</label>
                   <input
                     type="text"
                     value={formState.name}
                     onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg bg-bg-primary/50 border border-white/5 focus:border-accent-primary/50 focus:ring-2 focus:ring-accent-primary/20 outline-none transition-all text-text-primary placeholder:text-text-secondary/50"
-                    placeholder="John Doe"
+                    className="w-full px-5 py-4 rounded-xl bg-bg-primary/50 border border-white/5 focus:border-accent-primary/50 focus:ring-2 focus:ring-accent-primary/20 outline-none transition-all text-text-primary placeholder:text-text-secondary/50 text-lg"
+                    placeholder="What should I call you?"
                     required
                   />
                 </div>
 
                 {/* Email field */}
                 <div>
-                  <label className="block text-text-secondary text-sm mb-2">Email Address</label>
+                  <label className="block text-text-secondary text-sm mb-3 tracking-wider uppercase">Email Address</label>
                   <input
                     type="email"
                     value={formState.email}
                     onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg bg-bg-primary/50 border border-white/5 focus:border-accent-primary/50 focus:ring-2 focus:ring-accent-primary/20 outline-none transition-all text-text-primary placeholder:text-text-secondary/50"
-                    placeholder="john@example.com"
+                    className="w-full px-5 py-4 rounded-xl bg-bg-primary/50 border border-white/5 focus:border-accent-primary/50 focus:ring-2 focus:ring-accent-primary/20 outline-none transition-all text-text-primary placeholder:text-text-secondary/50 text-lg"
+                    placeholder="your@email.com"
                     required
                   />
                 </div>
 
                 {/* Message field */}
                 <div>
-                  <label className="block text-text-secondary text-sm mb-2">Your Message</label>
+                  <label className="block text-text-secondary text-sm mb-3 tracking-wider uppercase">Your Message</label>
                   <textarea
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                     rows={5}
-                    className="w-full px-4 py-3 rounded-lg bg-bg-primary/50 border border-white/5 focus:border-accent-primary/50 focus:ring-2 focus:ring-accent-primary/20 outline-none transition-all text-text-primary placeholder:text-text-secondary/50 resize-none"
+                    className="w-full px-5 py-4 rounded-xl bg-bg-primary/50 border border-white/5 focus:border-accent-primary/50 focus:ring-2 focus:ring-accent-primary/20 outline-none transition-all text-text-primary placeholder:text-text-secondary/50 resize-none text-lg"
                     placeholder="Tell me about your project..."
                     required
                   />
                 </div>
 
-                {/* Submit button */}
+                {/* Submit button - cinema style */}
                 <motion.button
                   type="submit"
                   disabled={isSubmitting || submitted}
-                  className="w-full relative px-6 py-4 rounded-lg bg-gradient-to-r from-accent-primary to-accent-secondary text-white font-semibold overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed group"
+                  className="w-full relative overflow-hidden rounded-xl px-8 py-5 bg-gradient-to-r from-accent-primary to-accent-secondary text-white font-bold text-lg shadow-lg shadow-accent-primary/30 disabled:opacity-50 disabled:cursor-not-allowed group"
                   whileHover={{ scale: submitted ? 1 : 1.02 }}
                   whileTap={{ scale: submitted ? 1 : 0.98 }}
                 >
-                  <span className="relative z-10 flex items-center justify-center gap-2">
+                  <span className="relative z-10 flex items-center justify-center gap-3">
                     {isSubmitting ? (
                       <>
                         <motion.div
-                          className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                          className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full"
                           animate={{ rotate: 360 }}
                           transition={{ repeat: Infinity, duration: 1 }}
                         />
@@ -193,12 +185,12 @@ export default function ContactSection() {
                       </>
                     ) : submitted ? (
                       <>
-                        <Send size={18} />
+                        <Send size={20} />
                         Message Sent!
                       </>
                     ) : (
                       <>
-                        <Send size={18} />
+                        <Send size={20} />
                         Send Message
                       </>
                     )}

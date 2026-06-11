@@ -1,26 +1,26 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 25, stiffness: 200 };
+  const springConfig = { damping: 26, stiffness: 500 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const cursorInnerRef = useRef<HTMLDivElement>(null);
-  const isHoveringRef = useRef(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isClicking, setIsClicking] = useState(false);
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
+      setIsVisible(true);
 
-      // Check if hovering over interactive elements
       const target = e.target as HTMLElement;
       const isInteractive =
         target.tagName === "A" ||
@@ -29,32 +29,24 @@ export default function CustomCursor() {
         target.closest("button") ||
         target.closest("[data-cursor='pointer']");
 
-      if (isInteractive && !isHoveringRef.current) {
-        isHoveringRef.current = true;
-        cursorRef.current?.classList.add("cursor-hover");
-        cursorInnerRef.current?.classList.add("inner-hover");
-      } else if (!isInteractive && isHoveringRef.current) {
-        isHoveringRef.current = false;
-        cursorRef.current?.classList.remove("cursor-hover");
-        cursorInnerRef.current?.classList.remove("inner-hover");
-      }
+      setIsHovering(!!isInteractive);
     };
+
+    const handleMouseDown = () => setIsClicking(true);
+    const handleMouseUp = () => setIsClicking(false);
+    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => setIsVisible(true);
 
     window.addEventListener("mousemove", moveCursor);
-
-    // Hide cursor when leaving window
-    const handleMouseLeave = () => {
-      cursorRef.current?.classList.add("cursor-hidden");
-    };
-    const handleMouseEnter = () => {
-      cursorRef.current?.classList.remove("cursor-hidden");
-    };
-
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
     document.body.addEventListener("mouseleave", handleMouseLeave);
     document.body.addEventListener("mouseenter", handleMouseEnter);
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
       document.body.removeEventListener("mouseleave", handleMouseLeave);
       document.body.removeEventListener("mouseenter", handleMouseEnter);
     };
@@ -62,75 +54,59 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Outer cursor (follows slowly) */}
+      {/* Outer ring - smooth following */}
       <motion.div
-        ref={cursorRef}
-        className="cursor"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
         style={{
           translateX: cursorXSpring,
           translateY: cursorYSpring,
         }}
       >
-        {/* Inner cursor (follows fast) */}
         <motion.div
-          ref={cursorInnerRef}
-          className="cursor-inner"
+          className="relative"
+          animate={{
+            width: isHovering ? 60 : isClicking ? 30 : 40,
+            height: isHovering ? 60 : isClicking ? 30 : 40,
+          }}
+          transition={{ duration: 0.15, ease: "easeOut" }}
           style={{
-            translateX: cursorX,
-            translateY: cursorY,
+            background: isHovering
+              ? "rgba(225, 29, 72, 0.2)"
+              : "transparent",
+            border: `1.5px solid ${isHovering ? "rgba(225, 29, 72, 0.8)" : "rgba(255, 255, 255, 0.5)"}`,
+            borderRadius: "50%",
+            transform: "translate(-50%, -50%)",
           }}
         />
       </motion.div>
 
+      {/* Inner dot - fast following */}
+      <motion.div
+        className="fixed top-0 left-0 pointer-events-none z-[10000]"
+        style={{
+          translateX: cursorX,
+          translateY: cursorY,
+        }}
+      >
+        <motion.div
+          className="relative"
+          animate={{
+            width: isHovering ? 8 : isClicking ? 6 : 6,
+            height: isHovering ? 8 : isClicking ? 6 : 6,
+          }}
+          transition={{ duration: 0.1 }}
+          style={{
+            background: isHovering ? "#e11d48" : "#ffffff",
+            borderRadius: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        />
+      </motion.div>
+
+      {/* Hide default cursor */}
       <style>{`
-        .cursor {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 40px;
-          height: 40px;
-          border: 1px solid rgba(99, 102, 241, 0.5);
-          border-radius: 50%;
-          pointer-events: none;
-          z-index: 9999;
-          opacity: 1;
-          transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
-          mix-blend-mode: difference;
-        }
-
-        .cursor-inner {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 8px;
-          height: 8px;
-          background: rgba(99, 102, 241, 0.8);
-          border-radius: 50%;
-          transform: translate(-50%, -50%);
-          transition: width 0.3s, height 0.3s, background 0.3s;
-        }
-
-        .cursor.cursor-hover {
-          width: 60px;
-          height: 60px;
-          background: rgba(99, 102, 241, 0.1);
-          border-color: rgba(99, 102, 241, 0.8);
-        }
-
-        .cursor-inner.inner-hover {
-          width: 12px;
-          height: 12px;
-          background: rgba(99, 102, 241, 1);
-        }
-
-        .cursor.cursor-hidden {
-          opacity: 0;
-        }
-
-        @media (max-width: 768px) {
-          .cursor {
-            display: none;
-          }
+        * {
+          cursor: none !important;
         }
       `}</style>
     </>

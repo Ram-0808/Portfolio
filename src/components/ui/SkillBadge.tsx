@@ -19,38 +19,37 @@ export default function SkillBadge({
   index,
 }: SkillBadgeProps) {
   const categoryStyles = {
-    core: "from-indigo-500 to-blue-600 border-indigo-500/30",
-    ai: "from-purple-500 to-pink-600 border-purple-500/30",
-    other: "from-cyan-500 to-teal-600 border-cyan-500/30",
+    core: "from-red-500/10 to-orange-500/10 border-red-500/30 hover:border-red-500/50",
+    ai: "from-orange-500/10 to-amber-500/10 border-orange-500/30 hover:border-orange-500/50",
+    other: "from-amber-500/10 to-yellow-500/10 border-amber-500/30 hover:border-amber-500/50",
   };
 
   const iconStyles = {
-    core: "text-indigo-400",
-    ai: "text-purple-400",
-    other: "text-cyan-400",
+    core: "text-red-400",
+    ai: "text-orange-400",
+    other: "text-amber-400",
   };
 
   return (
     <motion.div
       className="relative group"
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ delay: index * 0.05, duration: 0.4 }}
-      whileHover={{ y: -5 }}
+      transition={{ delay: index * 0.05, duration: 0.5 }}
+      whileHover={{ y: -8, scale: 1.02 }}
     >
       <div
-        className={`relative p-4 rounded-xl bg-gradient-to-br ${categoryStyles[category]} border backdrop-blur-sm overflow-hidden transition-all duration-300 group-hover:shadow-lg group-hover:shadow-${category === "core" ? "indigo" : category === "ai" ? "purple" : "cyan"}-500/20`}
-        style={{ perspective: "1000px" }}
+        className={`relative p-5 rounded-2xl bg-gradient-to-br ${categoryStyles[category]} border backdrop-blur-sm overflow-hidden transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(225,29,72,0.15)]`}
       >
         {/* Glow effect on hover */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
         <div className="relative z-10 flex flex-col items-center gap-3">
-          <div className={`p-3 rounded-lg bg-bg-tertiary ${iconStyles[category]}`}>
+          <div className={`p-3 rounded-xl bg-bg-tertiary ${iconStyles[category]} group-hover:scale-110 transition-transform`}>
             <Icon size={24} />
           </div>
-          <span className="font-semibold text-sm text-text-primary">{name}</span>
+          <span className="font-bold text-sm text-text-primary tracking-wide">{name}</span>
           <div className="w-full">
             <div className="h-1.5 bg-bg-primary/50 rounded-full overflow-hidden">
               <motion.div
@@ -61,7 +60,7 @@ export default function SkillBadge({
                 transition={{ delay: 0.2 + index * 0.05, duration: 0.8, ease: "easeOut" }}
               />
             </div>
-            <span className="text-xs text-text-secondary mt-1 block text-center">
+            <span className="text-xs text-text-secondary mt-1 block text-center font-mono">
               {proficiency}%
             </span>
           </div>

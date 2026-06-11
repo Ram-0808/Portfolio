@@ -12,33 +12,42 @@ export default function SkillsSection() {
   const otherSkills = skills.filter((s) => s.category === "other");
 
   return (
-    <section id="skills" className="relative py-24 md:py-32">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-bg-secondary/30 to-transparent" />
+    <section id="skills" className="relative py-32 md:py-48">
+      {/* Dramatic background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-secondary/5 to-transparent" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        {/* Section header */}
+        {/* Section header - cinema style */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
         >
-          <span className="text-accent-primary font-mono text-sm tracking-wider">// MY STACK</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-text-primary mt-2">
-            Technologies I <span className="gradient-text">Work With</span>
+          <span className="text-accent-secondary font-mono text-xs tracking-[0.4em] uppercase">// Chapter 02</span>
+          <h2 className="text-5xl md:text-7xl font-black text-text-primary mt-4 tracking-tight">
+            MY <span className="gradient-text">ARSENAL</span>
           </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-accent-secondary to-accent-primary mx-auto mt-6" />
         </motion.div>
 
         {/* Core Skills */}
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 rounded-lg bg-indigo-500/10">
-              <Code2 className="w-5 h-5 text-indigo-400" />
+        <div className="mb-16">
+          <motion.div
+            className="flex items-center gap-4 mb-8"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="p-3 rounded-xl bg-accent-primary/10 border border-accent-primary/20">
+              <Code2 className="w-6 h-6 text-accent-primary" />
             </div>
-            <h3 className="text-xl font-semibold text-text-primary">Core Technologies</h3>
-          </div>
+            <div>
+              <h3 className="text-2xl font-bold text-text-primary">Core Technologies</h3>
+              <p className="text-sm text-text-secondary">The foundation of my work</p>
+            </div>
+          </motion.div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {coreSkills.map((skill, i) => (
               <SkillBadge key={skill.name} {...skill} index={i} />
@@ -46,29 +55,38 @@ export default function SkillsSection() {
           </div>
         </div>
 
-        {/* AI & Modern Tools */}
+        {/* AI & Modern Tools - cinema card */}
         <motion.div
-          className="mb-12"
-          initial={{ opacity: 0, y: 30 }}
+          className="mb-16"
+          initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
         >
-          <GlassCard hover={false} className="p-8 relative overflow-hidden">
-            {/* Glow effect */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
+          <GlassCard hover={false} className="p-10 bg-gradient-to-br from-bg-secondary/90 to-bg-primary/95 relative overflow-hidden">
+            {/* Glow effects */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-accent-secondary/10 rounded-full blur-[100px]" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent-primary/10 rounded-full blur-[80px]" />
 
             <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 rounded-lg bg-purple-500/10">
-                  <Sparkles className="w-5 h-5 text-purple-400" />
+              <motion.div
+                className="flex items-center gap-4 mb-8"
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="p-3 rounded-xl bg-accent-secondary/10 border border-accent-secondary/20">
+                  <Sparkles className="w-6 h-6 text-accent-secondary" />
                 </div>
-                <h3 className="text-xl font-semibold text-text-primary">AI-Powered Development</h3>
-                <span className="px-2 py-1 bg-purple-500/20 text-purple-300 text-xs rounded-full font-mono">
-                  Future Tech
+                <div>
+                  <h3 className="text-2xl font-bold text-text-primary">AI-Powered Development</h3>
+                  <p className="text-sm text-text-secondary">The future of building</p>
+                </div>
+                <span className="ml-auto px-4 py-1.5 bg-accent-secondary/20 text-accent-secondary text-xs rounded-full font-bold tracking-wide">
+                  NEXT GEN
                 </span>
-              </div>
-              <p className="text-text-secondary mb-6 max-w-2xl">
+              </motion.div>
+              <p className="text-lg text-text-secondary mb-8 max-w-3xl leading-relaxed">
                 I leverage AI tools like Cursor and Claude to accelerate development. Vibe coding
                 allows me to rapidly prototype and build production-ready applications with clean,
                 maintainable code.
@@ -84,12 +102,20 @@ export default function SkillsSection() {
 
         {/* Other Skills */}
         <div>
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 rounded-lg bg-cyan-500/10">
-              <Layers className="w-5 h-5 text-cyan-400" />
+          <motion.div
+            className="flex items-center gap-4 mb-8"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="p-3 rounded-xl bg-accent-tertiary/10 border border-accent-tertiary/20">
+              <Layers className="w-6 h-6 text-accent-tertiary" />
             </div>
-            <h3 className="text-xl font-semibold text-text-primary">Additional Skills</h3>
-          </div>
+            <div>
+              <h3 className="text-2xl font-bold text-text-primary">Additional Skills</h3>
+              <p className="text-sm text-text-secondary">What else I bring to the table</p>
+            </div>
+          </motion.div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {otherSkills.map((skill, i) => (
               <SkillBadge
