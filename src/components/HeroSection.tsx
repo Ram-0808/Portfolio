@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { ArrowRight, Download } from "lucide-react";
 import Button from "./ui/Button";
 import { personalInfo } from "../lib/constants";
+import AnimatedBlob from "./AnimatedBlob";
+import MouseParallax from "./MouseParallax";
 
 const roles = ["Backend Developer", "Django Expert", "AI Enthusiast", "Problem Solver"];
 
@@ -42,6 +44,9 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* 3D Animated Blob Background */}
+      <AnimatedBlob />
+
       {/* Animated background orbs */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -60,8 +65,9 @@ export default function HeroSection() {
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 grid-pattern opacity-50" />
 
-      {/* Content */}
-      <motion.div className="relative z-10 max-w-4xl mx-auto px-6 text-center" style={{ opacity }}>
+      {/* Content with Mouse Parallax */}
+      <MouseParallax strength={30} className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+        <motion.div style={{ opacity }}>
         {/* Greeting */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -150,7 +156,8 @@ export default function HeroSection() {
             />
           </motion.div>
         </motion.div>
-      </motion.div>
+        </motion.div>
+      </MouseParallax>
     </section>
   );
 }
