@@ -88,11 +88,11 @@ export default function ContactSection() {
                 <div className="p-3 rounded-lg bg-accent-primary/10">
                   <Send className="w-5 h-5 text-accent-primary" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="text-text-secondary text-sm">Email</p>
                   <a
                     href={`mailto:${personalInfo.email}`}
-                    className="text-text-primary font-medium hover:text-accent-primary transition-colors"
+                    className="text-text-primary font-medium hover:text-accent-primary transition-colors break-all"
                   >
                     {personalInfo.email}
                   </a>

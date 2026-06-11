@@ -24,7 +24,7 @@ export default function Footer() {
           </div>
 
           {/* Social links */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 md:gap-4">
             {socialLinks.map((link) => {
               const IconComponent = link.icon as React.ComponentType<{size?: number; className?: string}>;
               return (

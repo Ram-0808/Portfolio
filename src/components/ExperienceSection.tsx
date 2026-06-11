@@ -32,11 +32,11 @@ export default function ExperienceSection() {
 
         {/* Timeline */}
         <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-accent-primary via-accent-secondary to-transparent transform md:-translate-x-1/2" />
+          {/* Vertical line - hidden on mobile, centered on desktop */}
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-accent-primary via-accent-secondary to-transparent transform -translate-x-1/2" />
 
           {/* Timeline items */}
-          <div className="space-y-12">
+          <div className="space-y-8 md:space-y-12">
             {experiences.map((exp, index) => (
               <motion.div
                 key={exp.company}
@@ -48,8 +48,8 @@ export default function ExperienceSection() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                {/* Timeline dot */}
-                <div className="absolute left-0 md:left-1/2 w-4 h-4 rounded-full bg-accent-primary transform md:-translate-x-1/2 -translate-y-1 z-10">
+                {/* Timeline dot - hidden on mobile, centered on desktop */}
+                <div className="hidden md:flex absolute left-1/2 w-4 h-4 rounded-full bg-accent-primary transform -translate-x-1/2 -translate-y-1 z-10 items-center justify-center">
                   {exp.current && (
                     <motion.div
                       className="absolute inset-0 rounded-full bg-accent-primary"
@@ -59,8 +59,8 @@ export default function ExperienceSection() {
                   )}
                 </div>
 
-                {/* Content */}
-                <div className={`flex-1 ml-8 md:ml-0 ${index % 2 === 0 ? "md:pr-12" : "md:pl-12"}`}>
+                {/* Content - always centered on mobile */}
+                <div className={`flex-1 ${index % 2 === 0 ? "md:pr-12" : "md:pl-12"}`}>
                   <GlassCard hover={false} className="p-6">
                     {/* Header */}
                     <div className="flex items-start justify-between mb-4">

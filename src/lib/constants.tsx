@@ -78,7 +78,7 @@ export const personalInfo = {
   location: "India",
   email: "raghuramkuna2003@gmail.com",
   available: true,
-  yearsExperience: 2,
+  yearsExperience: 1,
   projectsCompleted: 10,
   clientsServed: 5,
 };
@@ -140,7 +140,7 @@ export const experiences: Experience[] = [
   {
     company: "Absolin Software Solutions LLP",
     role: "Backend Developer",
-    period: "2024 - Present",
+    period: "2025 - Present",
     current: true,
     description: "Building robust backend systems for a product-based startup, focusing on scalable architecture and clean code practices.",
     highlights: [
