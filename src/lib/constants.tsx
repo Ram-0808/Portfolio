@@ -89,6 +89,7 @@ export const skills: Skill[] = [
   { name: "PostgreSQL", icon: Database, proficiency: 85, category: "core" },
   { name: "REST APIs", icon: Globe, proficiency: 90, category: "core" },
   { name: "Git & GitHub", icon: GitBranch, proficiency: 85, category: "core" },
+  { name: "Linux", icon: Terminal, proficiency: 85, category: "core" },
   { name: "AI-Powered Dev", icon: Sparkles, proficiency: 90, category: "ai" },
   { name: "Vibe Coding", icon: Zap, proficiency: 85, category: "ai" },
   { name: "Cursor / Claude", icon: Bot, proficiency: 88, category: "ai" },
