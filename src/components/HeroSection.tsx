@@ -8,7 +8,7 @@ import SplitText from "./SplitText";
 import ParallaxOrbs from "./ParallaxOrbs";
 import MagneticButton from "./MagneticButton";
 
-const roles = ["Backend Developer", "Django Expert", "AI Enthusiast", "Problem Solver"];
+const roles = ["Backend Developer", "Django Developer", "AI Enthusiast", "Problem Solver"];
 
 export default function HeroSection() {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -78,7 +78,7 @@ export default function HeroSection() {
         {/* Main heading - dramatic cinema style with split text animation */}
         <div className="mb-8">
           <SplitText
-            text="I BUILD DIGITAL EXPERIENCES"
+            text="I BUILD PRODUCTS"
             className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight"
             delay={0.2}
             staggerDelay={0.03}
