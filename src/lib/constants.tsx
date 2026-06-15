@@ -134,6 +134,23 @@ export const projects: Project[] = [
       "Real-time Updates",
       "Lead Scoring System"
     ]
+  },
+  {
+    id: "feast-and-fit",
+    title: "Feast & Fit",
+    description: "Premium protein food merchandise e-commerce platform for fitness enthusiasts.",
+    longDescription: "A modern e-commerce platform for Feast & Fit, a premium protein food brand. Features include product catalog, shopping cart, order management, and a smooth checkout experience designed for fitness-conscious customers.",
+    tech: ["Django", "PostgreSQL", "React", "Tailwind CSS", "E-commerce"],
+    liveUrl: "https://ram-0808.github.io/feast-and-fit/",
+    imageGradient: "from-green-500 to-emerald-600",
+    features: [
+      "Product Catalog",
+      "Shopping Cart",
+      "Order Management",
+      "Product Filtering",
+      "Responsive Design",
+      "Smooth Checkout"
+    ]
   }
 ];
 
